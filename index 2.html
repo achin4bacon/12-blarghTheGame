@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>SMASHING!</title>
+	<!-- code.jquery.com - uncompressed -->
+	<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+	<script>
+		(function ($) {
+			$.extend({
+				playSound: function () {
+					/**
+		 * @author Alexander Manzyuk <admsev@gmail.com>
+		 * Copyright (c) 2012 Alexander Manzyuk - released under MIT License
+		 * https://github.com/admsev/jquery-play-sound
+		 * Usage: $.playSound('http://example.org/sound')
+		 * $.playSound('http://example.org/sound.wav')
+		 * $.playSound('/attachments/sounds/1234.wav')
+		 * $.playSound('/attachments/sounds/1234.mp3')
+		 * $.stopSound();
+		**/
+					return $(
+						'<audio class="sound-player" autoplay="autoplay" style="display:none;">'
+						+ '<source src="' + arguments[0] + '" />'
+						+ '<embed src="' + arguments[0] + '" hidden="true" autostart="true" loop="false"/>'
+						+ '</audio>'
+					).appendTo('body');
+				},
+				stopSound: function () {
+					$(".sound-player").remove();
+				}
+			});
+		})(jQuery);
+	</script>
+	<style>
+		body {
+			text-align: center;
+			font-family: monospace;
+			background-color: blanchedalmond;
+		}
+	</style>
+</head>
+
+<body>
+	<img src="./top.png">
+	<button id="clickme"><img src="http://i0.kym-cdn.com/photos/images/original/000/285/965/681.png" width="25%" height="25%"></button><br>
+	<h1>Click Nigel to add Blarghs!</h1>
+	<div id="points"></div>
+	<div id="mashers"></div>
+	<div id="devil"></div>
+	<div id="thousand"></div>
+	<br>
+	<h1>Click SMASHING to BUY A SUPER NIGEL FOR 100 BLARGHS!!</h1>
+	<button id="buySuperNigel"><img src="https://img.memesuper.com/48dfeb915c925f9fddd6830612a1e927_smashing-meme-memesuper-nigel-thornberry-smashing-meme_580-443.jpeg" width='50%' height='50%'></button>
+	<br><br> He'll automatically give you more Blarghs. You can have as many Super Nigels as you want, so don't be shy!
+	<div id="smashing"></div>
+
+
+
+	<script>
+		var points = 749;
+		var mashers = 0;
+
+		function showPoints() {
+			$('#points').text('You have ' + points + ' Blarghs');
+			$('#mashers').text('You have ' + mashers + ' SUPER NIGELS!');
+		};
+
+		function specialties() {
+			if (points === 750) {
+				$('#thousand').append('<img src="https://media2.giphy.com/media/vkK5pezseYous/giphy.gif"> <br><br>WOW, THAT IS A LOT OF CLICKS!!!!!'
+				)
+				setTimeout(function () {
+					$('#thousand').html('');
+				}, 5000)
+			}
+			if (points === 666) {
+				points = 0;
+				alert('Nigel stole all your blarghs!')
+				$('#devil').append('<img    src="https://s-media-cache-ak0.pinimg.com/originals/15/c2/a0/15c2a05c0a35b4e37bab9c8ff4f2831f.gif">')
+				setTimeout(function () {
+					$('#devil').html('');
+				}, 5000)
+			}
+			if (points % 11 === 0 && mashers !== 0) {
+				alert('Congratulations! You hit a number of Blarghs divisible by 11! Enjoy 3x as many Super Nigels!')
+				newMashers = mashers * 3 - mashers;
+				mashers = mashers * 3;
+
+				for (var i = 0; i < newMashers; i++) {
+					$('#smashing').append('<img src="https://media0.giphy.com/media/TvLJmJ9h7khdC/200.webp#0-grid1" width="10%" height="10%">')
+				}
+			}
+		}
+
+		var runMashers = function () {
+			points += mashers;
+			showPoints();
+		};
+
+		$(document).ready(function () {
+			$('#clickme').click(function () {
+				points++;
+				showPoints();
+				specialties();
+				$.playSound('./blarg.mp3')
+			});
+
+
+			$('#buySuperNigel').click(function () {
+
+				if (points >= 100) {
+					points -= 100;
+					mashers++;
+					showPoints();
+					$('#smashing').append('<img src="https://media0.giphy.com/media/TvLJmJ9h7khdC/200.webp#0-grid1" width="10%" height="10%">')
+					$.playSound('./smashing.mp3')
+				}
+				else if (points < 100) {
+					alert('You do not have enough Blarghs!!! You need 100 Blarghs to buy a Super Nigel!')
+				}
+			});
+
+			setInterval(runMashers, 1000);
+		});
+	</script>
+</body>
+
+</html>

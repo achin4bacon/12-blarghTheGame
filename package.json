@@ -1,0 +1,22 @@
+{
+  "name": "12-blarghthegame",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dormammergue/12-blarghTheGame.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dormammergue/12-blarghTheGame/issues"
+  },
+  "homepage": "https://github.com/dormammergue/12-blarghTheGame#readme",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}

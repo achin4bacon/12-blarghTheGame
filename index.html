@@ -59,7 +59,7 @@
 
 
 	<script>
-		var points = 749;
+		var points = 656;
 		var mashers = 0;
 
 		function showPoints() {
@@ -75,7 +75,7 @@
 					$('#thousand').html('');
 				}, 5000)
 			}
-			if (points === 666) {
+			else if (points === 666) {
 				points = 0;
 				alert('Nigel stole all your blarghs!')
 				$('#devil').append('<img    src="https://s-media-cache-ak0.pinimg.com/originals/15/c2/a0/15c2a05c0a35b4e37bab9c8ff4f2831f.gif">')
@@ -83,7 +83,7 @@
 					$('#devil').html('');
 				}, 5000)
 			}
-			if (points % 11 === 0 && mashers !== 0) {
+			else if (points % 11 === 0 && mashers !== 0) {
 				alert('Congratulations! You hit a number of Blarghs divisible by 11! Enjoy 3x as many Super Nigels!')
 				newMashers = mashers * 3 - mashers;
 				mashers = mashers * 3;

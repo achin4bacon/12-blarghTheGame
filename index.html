@@ -7,19 +7,24 @@
 	<!-- code.jquery.com - uncompressed -->
 	<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
 	<script>
+		    ///////////////////////////////////
+		   ///////////////////////////////////
+		  ///////jQuery sound function///////
+		 ///////////////////////////////////
+		///////////////////////////////////
 		(function ($) {
 			$.extend({
 				playSound: function () {
 					/**
-		 * @author Alexander Manzyuk <admsev@gmail.com>
-		 * Copyright (c) 2012 Alexander Manzyuk - released under MIT License
-		 * https://github.com/admsev/jquery-play-sound
-		 * Usage: $.playSound('http://example.org/sound')
-		 * $.playSound('http://example.org/sound.wav')
-		 * $.playSound('/attachments/sounds/1234.wav')
-		 * $.playSound('/attachments/sounds/1234.mp3')
-		 * $.stopSound();
-		**/
+							* @author Alexander Manzyuk <admsev@gmail.com>
+							* Copyright (c) 2012 Alexander Manzyuk - released under MIT License
+							* https://github.com/admsev/jquery-play-sound
+							* Usage: $.playSound('http://example.org/sound')
+							* $.playSound('http://example.org/sound.wav')
+							* $.playSound('/attachments/sounds/1234.wav')
+							* $.playSound('/attachments/sounds/1234.mp3')
+							* $.stopSound();
+							**/
 					return $(
 						'<audio class="sound-player" autoplay="autoplay" style="display:none;">'
 						+ '<source src="' + arguments[0] + '" />'
@@ -32,8 +37,10 @@
 				}
 			});
 		})(jQuery);
+
 	</script>
 	<style>
+		/*CSS styling for body*/
 		body {
 			text-align: center;
 			font-family: monospace;
@@ -43,34 +50,69 @@
 </head>
 
 <body>
-	<img src="./top.png">
+	<!--top banner/game name-->
+	<img src="./top.png" alt='smashing'>
+	
+	<!--Click Nigel + 1 pt-->
 	<button id="clickme"><img src="http://i0.kym-cdn.com/photos/images/original/000/285/965/681.png" width="25%" height="25%"></button><br>
 	<h1>Click Nigel to add Blarghs!</h1>
+
+	<!--Displays number of Blarghs-->
 	<div id="points"></div>
+
+	<!--Number of SuperNigels-->
 	<div id="mashers"></div>
+
+	<!--Div for 666 Blarghs-->
 	<div id="devil"></div>
+
+	<!--Div for 750 Blargh Specialty-->
 	<div id="thousand"></div>
+
+
 	<br>
+	<!--Click Nigel + 1 Super Nigel-->
 	<h1>Click SMASHING to BUY A SUPER NIGEL FOR 100 BLARGHS!!</h1>
 	<button id="buySuperNigel"><img src="https://img.memesuper.com/48dfeb915c925f9fddd6830612a1e927_smashing-meme-memesuper-nigel-thornberry-smashing-meme_580-443.jpeg" width='50%' height='50%'></button>
 	<br><br> He'll automatically give you more Blarghs. You can have as many Super Nigels as you want, so don't be shy!
+	
+	<!--Super Nigels show up here-->
 	<div id="smashing"></div>
 
 
 
 	<script>
-		var points = 656;
+			///////////////////////////////////
+		   ///////////////////////////////////
+		  ///////// Starting Points /////////
+		 ///////////////////////////////////
+		///////////////////////////////////
+
+		var points = 100;
 		var mashers = 0;
+
+		    ///////////////////////////////////
+		   ///////////////////////////////////
+		  /// Display Blarghs/Super Nigels///
+		 ///////////////////////////////////
+		///////////////////////////////////
 
 		function showPoints() {
 			$('#points').text('You have ' + points + ' Blarghs');
 			$('#mashers').text('You have ' + mashers + ' SUPER NIGELS!');
 		};
 
+		    ///////////////////////////////////
+		   ///////////////////////////////////
+		  ///// Special Point Conditions/////
+		 ///////////////////////////////////
+		///////////////////////////////////
+
 		function specialties() {
 			if (points === 750) {
 				$('#thousand').append('<img src="https://media2.giphy.com/media/vkK5pezseYous/giphy.gif"> <br><br>WOW, THAT IS A LOT OF CLICKS!!!!!'
 				)
+				//clear thousand div after image has displayed for 5 seconds
 				setTimeout(function () {
 					$('#thousand').html('');
 				}, 5000)
@@ -80,48 +122,66 @@
 				alert('Nigel stole all your blarghs!')
 				$('#devil').append('<img    src="https://s-media-cache-ak0.pinimg.com/originals/15/c2/a0/15c2a05c0a35b4e37bab9c8ff4f2831f.gif">')
 				setTimeout(function () {
+					//clear devil div after image has been displayed  for 5 seconds
 					$('#devil').html('');
 				}, 5000)
 			}
-			else if (points % 11 === 0 && mashers !== 0) {
-				alert('Congratulations! You hit a number of Blarghs divisible by 11! Enjoy 3x as many Super Nigels!')
+			else if (points % 111 === 0 && mashers !== 0) {
+				alert('Congratulations! You hit a number of Blarghs divisible by 111! Enjoy 3x as many Super Nigels!')
+				//newMashers to add super nigel pictures to smashing div
 				newMashers = mashers * 3 - mashers;
 				mashers = mashers * 3;
 
 				for (var i = 0; i < newMashers; i++) {
+					//loops through each masher in new mashers and a nigel for each
 					$('#smashing').append('<img src="https://media0.giphy.com/media/TvLJmJ9h7khdC/200.webp#0-grid1" width="10%" height="10%">')
 				}
 			}
 		}
+		    ///////////////////////////////////
+		   ///////////////////////////////////
+		  //runMashers-1pt per Super Nigel //
+		 ///////////////////////////////////
+		///////////////////////////////////
 
 		var runMashers = function () {
 			points += mashers;
 			showPoints();
 		};
 
+		    ///////////////////////////////////
+		   ///////////////////////////////////
+		  //////////Click functions//////////
+		 ///////////////////////////////////
+		///////////////////////////////////
 		$(document).ready(function () {
+			//click Nigel gain one point
 			$('#clickme').click(function () {
 				points++;
 				showPoints();
+				///run special conditions and plays blargh on click
 				specialties();
 				$.playSound('./blarg.mp3')
 			});
 
-
+			//buy Super Nigel
 			$('#buySuperNigel').click(function () {
-
+				//can't buy without 100 points
 				if (points >= 100) {
 					points -= 100;
 					mashers++;
 					showPoints();
+					//play Smashing sound and show points on click
 					$('#smashing').append('<img src="https://media0.giphy.com/media/TvLJmJ9h7khdC/200.webp#0-grid1" width="10%" height="10%">')
+					//append SuperNigel gif to smashing div
 					$.playSound('./smashing.mp3')
 				}
+				//alert user if they do not have enough points
 				else if (points < 100) {
 					alert('You do not have enough Blarghs!!! You need 100 Blarghs to buy a Super Nigel!')
 				}
 			});
-
+			//runMashers every second to accumulate points
 			setInterval(runMashers, 1000);
 		});
 	</script>
